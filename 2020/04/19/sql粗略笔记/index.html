@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="owasp （开放式web应用程序安全项目），总结了十项最严重的应用程序安全风险系列表 这是走安全最起码该了解的知识 1.注入目前最常见的注入就是SQL注入，但是除了sql注入，还有nosal、os注入、LDAP注入。这些的函数和命令语法的缺陷进行的攻击。  原理：因为程序的判断不够严谨，渗透者利用不安全的命令作为查询对象，而解析器进行解析时，因为存在注入缺陷，将查询对象认为是命令或者因为闭合的语">
+<meta name="description" content="sql注入前，语法复习重新梳理（关键字记得大写，sql不分，但是自己会好分点！！） sql：假装有一个表 user（name，id，age） 进入数据库 ：use 库名 查询信息：SELECT  * FROM user；   查询指定字段：SELECT  name ，id FROM user； 列去重（一列的数据有重复的，只想了解一列有哪些不同的）SELECT  DISTINCT id ，id F">
 <meta property="og:type" content="article">
-<meta property="og:title" content="owasp top 十大漏洞理解笔记">
-<meta property="og:url" content="http://yoursite.com/2020/04/13/owasp%20top%20%E5%8D%81%E5%A4%A7%E6%BC%8F%E6%B4%9E%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="sql粗略笔记">
+<meta property="og:url" content="http://yoursite.com/2020/04/19/sql%E7%B2%97%E7%95%A5%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="codegirl&#39;Diary">
-<meta property="og:description" content="owasp （开放式web应用程序安全项目），总结了十项最严重的应用程序安全风险系列表 这是走安全最起码该了解的知识 1.注入目前最常见的注入就是SQL注入，但是除了sql注入，还有nosal、os注入、LDAP注入。这些的函数和命令语法的缺陷进行的攻击。  原理：因为程序的判断不够严谨，渗透者利用不安全的命令作为查询对象，而解析器进行解析时，因为存在注入缺陷，将查询对象认为是命令或者因为闭合的语">
+<meta property="og:description" content="sql注入前，语法复习重新梳理（关键字记得大写，sql不分，但是自己会好分点！！） sql：假装有一个表 user（name，id，age） 进入数据库 ：use 库名 查询信息：SELECT  * FROM user；   查询指定字段：SELECT  name ，id FROM user； 列去重（一列的数据有重复的，只想了解一列有哪些不同的）SELECT  DISTINCT id ，id F">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-13T10:05:40.000Z">
-<meta property="article:modified_time" content="2020-04-18T06:24:37.370Z">
+<meta property="og:image" content="http://yoursite.com/2020/04/19/sql%E7%B2%97%E7%95%A5%E7%AC%94%E8%AE%B0/1.png">
+<meta property="article:published_time" content="2020-04-19T10:05:40.000Z">
+<meta property="article:modified_time" content="2020-04-27T07:48:55.010Z">
 <meta property="article:author" content="lyly">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/19/sql%E7%B2%97%E7%95%A5%E7%AC%94%E8%AE%B0/1.png">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/04/13/owasp top 十大漏洞理解笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/19/sql粗略笔记/"/>
 
 
 
 
 
-  <title>owasp top 十大漏洞理解笔记 | codegirl'Diary</title>
+  <title>sql粗略笔记 | codegirl'Diary</title>
   
 
 
@@ -232,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/13/owasp%20top%20%E5%8D%81%E5%A4%A7%E6%BC%8F%E6%B4%9E%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/19/sql%E7%B2%97%E7%95%A5%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyly">
@@ -249,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">owasp top 十大漏洞理解笔记</h1>
+          <h1 class="post-title" itemprop="name headline">sql粗略笔记</h1>
         
 
         <div class="post-meta">
@@ -261,8 +263,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-13T18:05:40+08:00">
-                2020-04-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-19T18:05:40+08:00">
+                2020-04-19
               </time>
             
 
@@ -304,148 +306,37 @@
       
 
       
-        <p>owasp （开放式web应用程序安全项目），总结了十项最严重的应用程序安全风险系列表</p>
-<p>这是走安全最起码该了解的知识</p>
-<h5 id="1-注入"><a href="#1-注入" class="headerlink" title="1.注入"></a>1.注入</h5><p>目前最常见的注入就是SQL注入，但是除了sql注入，还有nosal、os注入、LDAP注入。这些的函数和命令语法的缺陷进行的攻击。</p>
+        <h4 id="sql注入前，语法复习"><a href="#sql注入前，语法复习" class="headerlink" title="sql注入前，语法复习"></a>sql注入前，语法复习</h4><p>重新梳理（关键字记得大写，sql不分，但是自己会好分点！！）</p>
+<h5 id="sql：假装有一个表-user（name，id，age）"><a href="#sql：假装有一个表-user（name，id，age）" class="headerlink" title="sql：假装有一个表 user（name，id，age）"></a>sql：假装有一个表 user（name，id，age）</h5><ul>
+<li>进入数据库 ：use 库名<ul>
+<li>查询信息：SELECT  * FROM user；</li>
+</ul>
+</li>
+<li>查询指定字段：SELECT  name ，id FROM user；</li>
+<li>列去重（一列的数据有重复的，只想了解一列有哪些不同的）SELECT  DISTINCT id ，id FROM user；</li>
+<li>where 语句：SELECT id from user where id = 2;<br><img src="/2020/04/19/sql%E7%B2%97%E7%95%A5%E7%AC%94%E8%AE%B0/1.png" alt="Alt text"></li>
+<li>SQL的 AND  和 OR    ：如果第一个条件和第二个条件都成立，则 AND 运算符显示一条记录。</li>
+</ul>
+<p>如果第一个条件和第二个条件中只要有一个成立，则 OR 运算符显示一条记录。</p>
 <ul>
-<li><p><strong>原理</strong>：因为程序的判断不够严谨，渗透者利用不安全的命令作为查询对象，而解析器进行解析时，因为存在注入缺陷，将查询对象认为是命令或者因为闭合的语法问题，就会输出相关内容。</p>
-</li>
-<li><p><strong>危害</strong>：通过对数据库的猜解，用户信息的泄露，如果是超级用户，整个数据库都会被接手。</p>
-</li>
+<li>SQL ORDER BY 关键字<br>ORDER BY 关键字用于对结果集按照一个列或者多个列进行排序。<br>ORDER BY 关键字默认按照升序对记录进行排序。如果需要按照降序对记录进行排序，您可以使用 <strong>DESC</strong> 关键字。</li>
+<li><strong>union</strong> ：SELECT a  FROM tables1 UNION SELECT b FROM table2；（UNION 内部的每个 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每个 SELECT 语句中的列的顺序必须相同）</li>
 </ul>
+<p><strong>函数部分</strong></p>
 <ul>
-<li><strong>造成原因</strong>：对输入的数据过滤不全，另一个就是没有对数据转义</li>
-</ul>
-<ul>
-<li><p><strong>防范措施</strong>：</p>
-<ul>
-<li><p>对输入类型进行黑白名单</p>
-</li>
-<li><p>输入数据进行转义</p>
-</li>
-<li><p>数据过滤 注入主要使用的符号，比如单引号、双引号、逗号、冒号、反斜杠之类的进行转换或者过滤。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="2-失效身份认证和会话管理"><a href="#2-失效身份认证和会话管理" class="headerlink" title="2.失效身份认证和会话管理"></a>2.失效身份认证和会话管理</h5><ul>
-<li><strong>原理</strong>：错误使用与身份认证和会话管理的应用程序，导致攻击者使用会话口令等进行暂时或者永久地冒充用户。</li>
-</ul>
-<ul>
-<li><p><strong>危害</strong>：通过冒充正规用户从而进入操作其他的漏洞查找。</p>
-</li>
-<li><p><strong>造成原因</strong>：开发人员实现了很多的功能，比如：登录中的记住我，找回密码，更改密码验证太简单或者不验证，会话的时间限制。</p>
-</li>
-</ul>
-<ul>
-<li><p><strong>防范措施</strong>：</p>
-<ul>
-<li>定义会话管理</li>
-<li>修改，更新密码进行验证</li>
-<li>使用单一入口</li>
-</ul>
-</li>
-</ul>
-<h5 id="3-跨站xss"><a href="#3-跨站xss" class="headerlink" title="3.跨站xss"></a>3.跨站xss</h5><ul>
-<li><p><strong>原理</strong>：利用浏览器对css的特性，将用户输入的内容显示在页面上，通过反弹的内容进而插入恶意代码，在点击页面时，执行相关的html代码，从而获取用户或者服务器的一些信息。xss分为存储型、反射型和基于DOM的。</p>
-</li>
-<li><p><strong>危害</strong>：破坏网站，重定向到攻击者指定站点，甚至xss拒绝服务攻击</p>
-</li>
-<li><p><strong>三种简介</strong>：</p>
-<ul>
-<li>存储型：用户输入存储在数据库中，比如留言板，站内消息，个人信息修改等</li>
-<li>反射型：url在页面显示的功能点（站内查询点，搜索）</li>
-<li>基于DOM：dom对象的页面程序（document。url等）</li>
-</ul>
-</li>
-<li><p><strong>防范措施</strong>：对输入的数据进行检测，规定输入类型和进行编码等。</p>
-</li>
-</ul>
-<h5 id="4-直接引用不安全的对象"><a href="#4-直接引用不安全的对象" class="headerlink" title="4.直接引用不安全的对象"></a>4.直接引用不安全的对象</h5><ul>
-<li><p><strong>原理</strong>：公开了内部对象的引用情况，没有做访问控制等的检查，就会出现通过这些对象进行数据调用。</p>
-</li>
-<li><p><strong>防范措施</strong>：</p>
-<ul>
-<li>使用间接对象对数据进行调用</li>
-<li>对直接对象调用进行访问控制</li>
-</ul>
-</li>
-</ul>
-<h5 id="5-安全配置错误"><a href="#5-安全配置错误" class="headerlink" title="5.安全配置错误"></a>5.安全配置错误</h5><ul>
-<li><p><strong>原理</strong>：在很多的应用程序中，是会默认提供很多允许接口，一般是不会被重视，但是就给了攻击者攻击点。</p>
-</li>
-<li><p><strong>危害</strong>：攻击者通过默认的账户，端口，未使用的网页，未安装补丁的漏洞，都是攻击者访问文件目录的通道。</p>
-</li>
-<li><p><strong>防范措施</strong>：</p>
-<ul>
-<li>及时打补丁</li>
-<li>尽可能使用更安全的应用程序</li>
-</ul>
-</li>
-</ul>
-<h5 id="6-敏感信息泄露"><a href="#6-敏感信息泄露" class="headerlink" title="6.敏感信息泄露"></a>6.敏感信息泄露</h5><ul>
-<li><p><strong>原理</strong>：信息存储在数据库，数据库成为攻击的重点目标，脱库，卖库太多的手段，都是因为数据库的加密或者用户的自我意识。</p>
-</li>
-<li><p><strong>危害</strong>：信息泄露会让更多的东西被攻击者拿到</p>
-</li>
-<li><p><strong>防范措施</strong>：</p>
-<ul>
-<li>进行传输时，做好加密存储和传输。</li>
-<li>选用更好的算法</li>
-<li>禁用包含敏感信息的页面缓存</li>
-</ul>
-</li>
-</ul>
-<h5 id="7-缺少功能级的访问控制bun"><a href="#7-缺少功能级的访问控制bun" class="headerlink" title="7.缺少功能级的访问控制bun"></a>7.缺少功能级的访问控制bun</h5><ul>
-<li><p><strong>原理</strong>：web程序中，有一部分的功能页面不需要进行验证就可以访问。</p>
-</li>
-<li><p><strong>危害</strong>：部分功能可能涉及超级管理员</p>
-</li>
-<li><p><strong>防范措施</strong>：</p>
-<ul>
-<li>进行明确权限划分</li>
-<li>检查管理权限是否满足，不满足直接拒绝访问权限</li>
-</ul>
-</li>
-</ul>
-<h5 id="8-csrf"><a href="#8-csrf" class="headerlink" title="8.csrf"></a>8.csrf</h5><ul>
-<li><p><strong>原理</strong>利用已登录的用户无意识下的操作，向服务器发送请求，从而实现攻击。</p>
-</li>
-<li><p><strong>危害</strong>：受害者的钱财丢失，信息泄露，甚至整个网站凉凉。</p>
-</li>
-<li><p><strong>防范措施</strong>：</p>
-<ul>
-<li>referer判断页面来源</li>
-<li>功能型的验证请求</li>
-<li>通过token进行csrf防护</li>
-</ul>
-</li>
-</ul>
-<h5 id="9-使用已知漏洞的组件"><a href="#9-使用已知漏洞的组件" class="headerlink" title="9.使用已知漏洞的组件"></a>9.使用已知漏洞的组件</h5><ul>
-<li><p><strong>原理</strong>：应用程序使用的组件已经有漏洞存在漏洞库</p>
-</li>
-<li><p><strong>危害</strong>：攻击者通过漏洞库就可以知道哪些组件存在问题，直接通过该组件进行攻击</p>
-</li>
-<li><p><strong>防范措施</strong>：</p>
-<ul>
-<li>对组件进行了解</li>
-<li>及时更新组件</li>
-<li>建立安全策略来管理组建的使用</li>
-</ul>
-</li>
-</ul>
-<h5 id="10-未验证重定向和转发"><a href="#10-未验证重定向和转发" class="headerlink" title="10.未验证重定向和转发"></a>10.未验证重定向和转发</h5><ul>
-<li><p><strong>原理</strong>：目标网站是通过未验证的参数指定，用户点击未经过验证的链接等，被重定向到恶意网站，或者安装恶意软件。</p>
-</li>
-<li><p><strong>危害</strong>：信息泄露</p>
-</li>
-<li><p><strong>防范措施</strong>：</p>
-<ul>
-<li>避免使用重定向</li>
-<li>进行重定向或者转发是不涉及用户参数</li>
-<li>确保目标参数值对当前用户是授权安全的。</li>
-</ul>
-</li>
+<li>concat()  连接两个字符串（有的网站只能显示一行，就可以连接两个多个输出）</li>
+<li>concat_ws(分隔符，str1，str2)</li>
+<li>group by：语句用于结合合计函数，根据一个或多个列对结果集进行分组。</li>
+<li>sleep(): 执行select sleep(N)可以让此语句运行N秒钟</li>
+<li>left(): 返回最左边的n个字符的字符串str，或NULL如果任何参数是NULL。</li>
+<li>COUNT:  count和distinct一起使用<br>COUNT(DISTINCT column_name)</li>
+<li>FLOOR() - 返回最大整数</li>
+<li>rand：用于产生 0 至 1 之间的随机数</li>
+<li>length：返回字符串的长度，以字节为单位</li>
+<li>EXTRACT() 函数用于返回日期/时间的单独部分，比如年、月、日、小时、分钟等等。</li>
+<li>LIKE :进行匹配（SELECT * FEOM user_name where name like ‘a%’）<br>%代表0或者多个字符，_ 代替一个字符<br>[]charlist]  代表任何    ，   [!charlist]不在字符列表中的任何单一字符。</li>
+<li>in ：允许在where的子句中规定多个值。</li>
+<li>between  and :子句中的值有一定范围。（not between）</li>
 </ul>
 
       
@@ -500,15 +391,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/04/19/sqli-labs%E9%80%9A%E5%85%B3%E6%89%8B%E5%86%8C/" rel="next" title="sqli-labs通关1-10">
+                <i class="fa fa-chevron-left"></i> sqli-labs通关1-10
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/04/18/%E6%B8%97%E9%80%8F%E6%B8%85%E7%90%86jio%E8%BF%B9/" rel="prev" title="渗透清理jio迹">
-                渗透清理jio迹 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -626,7 +517,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-注入"><span class="nav-number">1.</span> <span class="nav-text">1.注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-失效身份认证和会话管理"><span class="nav-number">2.</span> <span class="nav-text">2.失效身份认证和会话管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-跨站xss"><span class="nav-number">3.</span> <span class="nav-text">3.跨站xss</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-直接引用不安全的对象"><span class="nav-number">4.</span> <span class="nav-text">4.直接引用不安全的对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-安全配置错误"><span class="nav-number">5.</span> <span class="nav-text">5.安全配置错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-敏感信息泄露"><span class="nav-number">6.</span> <span class="nav-text">6.敏感信息泄露</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-缺少功能级的访问控制bun"><span class="nav-number">7.</span> <span class="nav-text">7.缺少功能级的访问控制bun</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-csrf"><span class="nav-number">8.</span> <span class="nav-text">8.csrf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-使用已知漏洞的组件"><span class="nav-number">9.</span> <span class="nav-text">9.使用已知漏洞的组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-未验证重定向和转发"><span class="nav-number">10.</span> <span class="nav-text">10.未验证重定向和转发</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#sql注入前，语法复习"><span class="nav-number">1.</span> <span class="nav-text">sql注入前，语法复习</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sql：假装有一个表-user（name，id，age）"><span class="nav-number">1.1.</span> <span class="nav-text">sql：假装有一个表 user（name，id，age）</span></a></li></ol></li></ol></div>
             
 
           </div>
