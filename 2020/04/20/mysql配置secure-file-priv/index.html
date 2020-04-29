@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="I can&#39;t predict the result, just try">
+<meta name="description" content="###关于mysql配置secure-file-priv查了很多资料，可以知道sqli-less7无法导出文件是因为my.ini的secure-file-priv参数。 1.先打开mysql用管理员身份打开cmd进入mysql&#x2F;bin的目录mysqld –installmysqld –initialize-insecure没有报错就说明对了 2.net start mysqlmysql -uroo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="渗透大概思路">
-<meta property="og:url" content="http://yoursite.com/2020/04/18/%E6%B8%97%E9%80%8F%E5%A4%A7%E6%A6%82%E6%80%9D%E8%B7%AF/index.html">
+<meta property="og:title" content="mysql导出文件secure-file-priv配置问题">
+<meta property="og:url" content="http://yoursite.com/2020/04/20/mysql%E9%85%8D%E7%BD%AEsecure-file-priv/index.html">
 <meta property="og:site_name" content="codegirl&#39;Diary">
-<meta property="og:description" content="I can&#39;t predict the result, just try">
+<meta property="og:description" content="###关于mysql配置secure-file-priv查了很多资料，可以知道sqli-less7无法导出文件是因为my.ini的secure-file-priv参数。 1.先打开mysql用管理员身份打开cmd进入mysql&#x2F;bin的目录mysqld –installmysqld –initialize-insecure没有报错就说明对了 2.net start mysqlmysql -uroo">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-18T06:41:12.000Z">
-<meta property="article:modified_time" content="2020-04-18T06:41:12.943Z">
+<meta property="article:published_time" content="2020-04-20T10:05:40.000Z">
+<meta property="article:modified_time" content="2020-04-27T10:22:36.497Z">
 <meta property="article:author" content="lyly">
 <meta name="twitter:card" content="summary">
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/04/18/渗透大概思路/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/20/mysql配置secure-file-priv/"/>
 
 
 
 
 
-  <title>渗透大概思路 | codegirl'Diary</title>
+  <title>mysql导出文件secure-file-priv配置问题 | codegirl'Diary</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/%E6%B8%97%E9%80%8F%E5%A4%A7%E6%A6%82%E6%80%9D%E8%B7%AF/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/20/mysql%E9%85%8D%E7%BD%AEsecure-file-priv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyly">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">渗透大概思路</h1>
+          <h1 class="post-title" itemprop="name headline">mysql导出文件secure-file-priv配置问题</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-18T14:41:12+08:00">
-                2020-04-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-20T18:05:40+08:00">
+                2020-04-20
               </time>
             
 
@@ -304,7 +304,12 @@
       
 
       
-        
+        <p>###关于mysql配置secure-file-priv<br>查了很多资料，可以知道sqli-less7无法导出文件是因为my.ini的secure-file-priv参数。</p>
+<p><strong>1.</strong>先打开mysql<br>用管理员身份打开cmd进入mysql/bin的目录<br>mysqld –install<br>mysqld –initialize-insecure<br>没有报错就说明对了</p>
+<p><strong>2.</strong>net start mysql<br>mysql -uroot -proot</p>
+<p><strong>3.</strong>show variables like ‘%secure%’<br>可以看到secure-file-priv的值为null</p>
+<p><strong>4.</strong>打开my.ini<br>添加secure-file-priv=”/“保存，然后mysql退出去<br>net stop mysql<br>再打开查看，就可以了。</p>
+
       
     </div>
     
@@ -357,8 +362,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/18/%E6%B8%97%E9%80%8F%E6%B8%85%E7%90%86jio%E8%BF%B9/" rel="next" title="渗透清理jio迹">
-                <i class="fa fa-chevron-left"></i> 渗透清理jio迹
+              <a href="/2020/04/19/sql%E7%B2%97%E7%95%A5%E7%AC%94%E8%AE%B0/" rel="next" title="sql粗略笔记">
+                <i class="fa fa-chevron-left"></i> sql粗略笔记
               </a>
             
           </div>
@@ -367,8 +372,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/04/19/sqli-labs%E9%80%9A%E5%85%B3%E6%89%8B%E5%86%8C/" rel="prev" title="sqli-labs通关1-10">
-                sqli-labs通关1-10 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/04/29/http%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="http的学习笔记">
+                http的学习笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
