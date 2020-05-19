@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="###sqli-less11-20 ####总结前十关学到的内容：对注入类型的判断：1.单引号，双引号，无符号，括号等符号注入2.报错注入：无信息内容返回，有错误信息返回，不同报错长度不同盲注：正确错误信息的返回情况3.文件导出注入：没有信息返回，有错误信息省略提示。通过其他能够查出服务器文件储存的位置（权限，完整路径，在目标服务器，长度）4.布尔盲注：有正确错误信息的反应5.延时盲注：都是正确">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs通关11-28">
+<meta property="og:url" content="http://yoursite.com/2020/04/25/sqli-labs11-28/index.html">
+<meta property="og:site_name" content="codegirl&#39;Diary">
+<meta property="og:description" content="###sqli-less11-20 ####总结前十关学到的内容：对注入类型的判断：1.单引号，双引号，无符号，括号等符号注入2.报错注入：无信息内容返回，有错误信息返回，不同报错长度不同盲注：正确错误信息的返回情况3.文件导出注入：没有信息返回，有错误信息省略提示。通过其他能够查出服务器文件储存的位置（权限，完整路径，在目标服务器，长度）4.布尔盲注：有正确错误信息的反应5.延时盲注：都是正确">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/11-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/11-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/11-3.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/11-4.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/11-5.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/12-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/12-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/13-3.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/14-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/14-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/15-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/15-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/16-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/17-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/17-3.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/17-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/17-4.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/17-5.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/17-6.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/17-9.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/19-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/20-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/20-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/20-4.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/21-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/21-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/22-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/23-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/23-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/23-3.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/24-0.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/24-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/24-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/25-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/25a-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/25a-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/26-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/26-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/26-3.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/26-4.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/26-5.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/26a-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/26a-4.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/27-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/27-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/27-3.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/27-4.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/27a-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/27a-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/28-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/28-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/28a-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/28a-2.png">
+<meta property="article:published_time" content="2020-04-25T02:05:40.000Z">
+<meta property="article:modified_time" content="2020-05-19T03:31:44.189Z">
+<meta property="article:author" content="lyly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/25/sqli-labs11-28/11-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/25/sqli-labs11-28/"/>
+
+
+
+
+
+  <title>sqli-labs通关11-28 | codegirl'Diary</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">codegirl'Diary</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/sqli-labs11-28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lyly">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lyly.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="codegirl'Diary">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sqli-labs通关11-28</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-25T10:05:40+08:00">
+                2020-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> ###sqli-less11-20<br> ####总结前十关学到的内容：<br>对注入类型的判断：<br>1.单引号，双引号，无符号，括号等符号注入<br>2.报错注入：无信息内容返回，有错误信息返回，不同报错长度不同<br><strong>盲注</strong>：正确错误信息的返回情况<br>3.文件导出注入：没有信息返回，有错误信息省略提示。通过其他能够查出服务器文件储存的位置（权限，完整路径，在目标服务器，长度）<br>4.布尔盲注：有正确错误信息的反应<br>5.延时盲注：都是正确信息，只有通过if和sleep进行判断。<br>####less-11<br>这一关开始就是post类型了<br>1.审查提交元素名：<br><img src="/2020/04/25/sqli-labs11-28/11-1.png" alt="Alt text"><br>2.sql语句：<br>select username，password from users where uname=’$uname’&amp;password=’$passwd’<br>当注入以后#代表注释掉后面的内容就相当于不需要密码也能够进行登录。<br>3.判断查询字段数<br><img src="/2020/04/25/sqli-labs11-28/11-2.png" alt="Alt text"><br><img src="/2020/04/25/sqli-labs11-28/11-3.png" alt="Alt text"><br>能够通过order by判断一共查询的语句。<br>4.判断显示位<br><img src="/2020/04/25/sqli-labs11-28/11-4.png" alt="Alt text"><br>5.查询语句构造<br><img src="/2020/04/25/sqli-labs11-28/11-5.png" alt="Alt text"><br>6.查库名，表名，列名，数据信息。<br>####less-12<br>1.基本判断：<br><img src="/2020/04/25/sqli-labs11-28/12-1.png" alt="Alt text"><br>2.查询<br><img src="/2020/04/25/sqli-labs11-28/12-2.png" alt="Alt text"><br>####less-13<br>没有信息显示<br>![Alt text](./13-2 2.png)<br>但是出现错误信息提示<br>![Alt text](./13-2 1.png)<br>想到了报错注入<br><img src="/2020/04/25/sqli-labs11-28/13-3.png" alt="Alt text"><br>后面和less5一样了<br>####less-14<br>同13题没有信息输出，但是会报错<br><img src="/2020/04/25/sqli-labs11-28/14-1.png" alt="Alt text"><br>一开始进行报错注入很容易出错，括号，还有表<br>information_schema.<br>比如我查的是<br><img src="/2020/04/25/sqli-labs11-28/14-2.png" alt="Alt text"><br>剩余同上<br>####less-15<br>没有报错信息，只有正确信息提示和错误信息提示，<br>判断出是单引号的无显示注入<br><img src="/2020/04/25/sqli-labs11-28/15-1.png" alt="Alt text"><br>布尔盲注和延时盲注都可以<br>也可以判断一下对文件是否有操作<br><img src="/2020/04/25/sqli-labs11-28/15-2.png" alt="Alt text"><br>还可以进行文件导出注入。</p>
+<h4 id="less-16"><a href="#less-16" class="headerlink" title="less-16"></a>less-16</h4><p><img src="/2020/04/25/sqli-labs11-28/16-1.png" alt="Alt text"><br>同样是布尔，文件，和延时<br>####less-17<br>通过测试可以看到uname的bug是不存在了<br>我们正确登录以后，出现这样的提示<br><img src="/2020/04/25/sqli-labs11-28/17-1.png" alt="Alt text"><br>说明只有登录名做了防护。<br>分析源代码中可以看到一些函数<br><img src="/2020/04/25/sqli-labs11-28/17-3.png" alt="Alt text"></p>
+<ul>
+<li>相关函数理解：<br>substr：进行值的截断前15个字符<br>get_magic_quotes_gpc()：接受已经转义处理的数据<br>addslashes() &amp; stripslashes()：处理预定义的字符，比如给单引号添加反斜杠<br>ctype_digit()：检测是否是正整数<br>mysql_real_escape_string()：转义特殊字符。<br>基本就是这道题不从这里入手的意思</li>
+</ul>
+<p>1,观察是否存在报错信息<br><img src="/2020/04/25/sqli-labs11-28/17-2.png" alt="Alt text"><br>2.分析注入类型<br>在之前基本都是作为查询信息出现的报错，而这一次在源码中密码部分是通过update进行的，所以使用报错语句要保证where后面有确定的对象。<br>less-5的是属于双注入<br><img src="/2020/04/25/sqli-labs11-28/17-4.png" alt="Alt text"><br>因为在less5里面是作为联合查询，字段数能够满足count还有concat，<br>但是在less17中，update使用的是and或者or，后面的子查询应该只能满足一个字段<br>这是子查询结果的情况<br><img src="/2020/04/25/sqli-labs11-28/17-5.png" alt="Alt text"><br>所以我理解为使用子查询会出现上图结果<br>使用派生表，则满足了字段数的要求。<br>3.构造语句<br><img src="/2020/04/25/sqli-labs11-28/17-6.png" alt="Alt text"><br>或者updatexml 和extractvalue<br>####less-18<br>http相关内容在另一篇博客</p>
+<p>1.我们进行了基本判断，但是都不行，并且界面存在ip，输入正确信息返回值是自己的agent<br><img src="/2020/04/25/sqli-labs11-28/17-9.png" alt="Alt text"><br>2.因为确实不知道，所以看了源码<br>看到是将agent插入到表中（insert  delete  select update 都可以进行注入）<br>3.正确登录会反应我们需要的信息<br>![Alt text](./17-8 2.png)<br>![Alt text](./17-8 1.png)<br>接下来就是表，列，信息的读取<br>####less-19<br>正确登录，能够显示的内容为refere，进行注入判断。<br>剩下就是构造。<br><img src="/2020/04/25/sqli-labs11-28/19-1.png" alt="Alt text"><br>####less-20<br>通过正常输入内容可以得到两个数据<br>第一个是用户名和密码提交创建cookie<br>respose返回的是 i  love  your cookie，没有其他内容<br>创建好cookie以后就可以收到一个新的数据流。其中包含了cookie<br>正常的回显内容<br><img src="/2020/04/25/sqli-labs11-28/20-1.png" alt="Alt text"><br>所以可以知道源码先通过用户名密码创建好cookie，二次访问直接通过cookie访问。看过源码也就更能理解，在用户名密码是没有注入的。<br><img src="/2020/04/25/sqli-labs11-28/20-2.png" alt="Alt text"><br>使用union select还有报错注入都可以<br>and (select 1 from (select count(<em>),concat((select version()),floor(rand(0)</em>2))x from information_schema.tables group by x)a)<br><img src="/2020/04/25/sqli-labs11-28/20-4.png" alt="Alt text"><br>####less-21<br>一头雾水，一脸懵逼，看了源码才知道再知道是进行解码<br><img src="/2020/04/25/sqli-labs11-28/21-1.png" alt="Alt text"><br>只需要将想要输入的先加密，后面解码的时候就算是注入了。<br><img src="/2020/04/25/sqli-labs11-28/21-2.png" alt="Alt text"><br>其余还是和20一样的。<br>####less-22<br><img src="/2020/04/25/sqli-labs11-28/22-1.png" alt="Alt text"><br>双引号<br>####less-23<br>直接像less-1的url输入<br><img src="/2020/04/25/sqli-labs11-28/23-1.png" alt="Alt text"><br>但是在闭合过程中出现了符号失效<img src="/2020/04/25/sqli-labs11-28/23-2.png" alt="Alt text"> 源码中也可以看出来是对#和–+都进行了过滤。</p>
+<p><strong>使用另外的过滤方式：</strong></p>
+<ul>
+<li>;%00:通过分号让程序以为结束了</li>
+<li>and / or：and ‘1’=’1     or ‘ 1’ =’1(符号凑对)<br><img src="/2020/04/25/sqli-labs11-28/23-3.png" alt="Alt text"><br>和第一题一样，可以通过url/hackbar直接进行提交，也可以就开始习惯bp了</li>
+</ul>
+<p><strong>ps:</strong><br>bp使用过程需要知道url编码到服务器的转换过程<br>(在浏览器中使用的是正常的字符，在提交过程中会进行编码，bp抓取到的就是url编码以后的)<br>进行bp的修改需要输入符号的url编码，在服务器会进行解码处理。<br>####less-24：<br><strong>二次排序注入：</strong>存储型注入，通过将恶意构造的字符存储到数据库，通过调用来进行sql语句的执行。<br>我们先任意输入注册一个用户，发现用户名可以任意输入：<img src="/2020/04/25/sqli-labs11-28/24-0.png" alt="Alt text"><br>用户创建成功以后，进入该用户修改密码<br><img src="/2020/04/25/sqli-labs11-28/24-2.png" alt="Alt text"><br>在这个时候会在数据库中查询，遇到语句为<br>UPDATE users SET passwd=”New_Pass” WHERE username =’ admin’#注释掉了后面的语句，会让数据库误以为我们是在修改admin账户从而达到注入的目的。<br><img src="/2020/04/25/sqli-labs11-28/24-1.png" alt="Alt text"><br>修改成功以后就能够使用admin和自己的密码进行登录。<br>####less-25<br>提示就说了and和or被过滤了<br>方法一：叠写<br>?id=1’ aandnd 1=(updatexml(1,concat(0x3a,(select user())),1))–+<br><img src="/2020/04/25/sqli-labs11-28/25-1.png" alt="Alt text"><br>方法二：大小写变形 Or,OR,oR<br>方法三：编码，hex，urlencode<br>方法四：添加注释/<em>or</em>/<br>方法五：利用符号 and=&amp;&amp; or=||<br>注入还是按照前面关卡一样<br>####less-25a</p>
+<ul>
+<li>先进行符号判断，发现单引号等都不是，所以是无符号的类型</li>
+<li>进行显示位的判断<br><img src="/2020/04/25/sqli-labs11-28/25a-2.png" alt="Alt text"></li>
+<li>进行显示信息的判断中可以知道没有错误回显<img src="/2020/04/25/sqli-labs11-28/25a-1.png" alt="Alt text"><br>所以这道题可以采用的就是union并且进行and  or的绕过<br>####less-26</li>
+<li>判断符号类型<img src="/2020/04/25/sqli-labs11-28/26-2.png" alt="Alt text"></li>
+<li>进行注入语句构造，可以看到对空字符也进行了过滤<br><img src="/2020/04/25/sqli-labs11-28/26-1.png" alt="Alt text"><br><img src="/2020/04/25/sqli-labs11-28/26-3.png" alt="Alt text"><br>源码中也可以看出过滤了很多的符号其中也包含了空格。但是可以进行替换，注释符–+ 替换为;%00<br>空格可以替换为%a0.<img src="/2020/04/25/sqli-labs11-28/26-4.png" alt="Alt text"><br>或者<img src="/2020/04/25/sqli-labs11-28/26-5.png" alt="Alt text"><br>####less-26a<br>这道题复习下基本注入的过程：</li>
+</ul>
+<p>1.进行注入类型的判定：<br><img src="/2020/04/25/sqli-labs11-28/26a-2.png" alt="Alt text"><br>只有单引号出现无显示，双引号正常显示，说明为单引号的注入类型<br>2.进行括号判定</p>
+<ul>
+<li>?id=2’ || ‘1’=’1：如果不存在括号<br>sql语句为：select * from users where id=’2’ || ‘1’=’0‘ 显示的就是为2的用户信息<br>如果存在括号<br>sql语句为：select * from users where id=（’2’||‘1’=‘1‘）结果判定为ture=1<br>所以是1用户的值。<br>![Alt text](./26a-1 2.png)<br>判定结果为存在括号</li>
+</ul>
+<p>3.构造注入语句：因为不存在报错信息，所以不能使用报错注入，可以进行盲注加绕过。<br>4.确定被过滤的字符进行绕过：<br>空格的替代符号<br>（%09   %0a   %0b  %0c  %0d  %a0）<br><img src="/2020/04/25/sqli-labs11-28/26a-4.png" alt="Alt text"><br>union select中间的空格替代符需要尝试，我这里只能使用%0和%a0.<br>5.在显示位上进行构造语句<br>####less-27</p>
+<ul>
+<li>判断注入类型以及是否具有括号<br><img src="/2020/04/25/sqli-labs11-28/27-1.png" alt="Alt text"></li>
+<li>确定过滤的字符<br><img src="/2020/04/25/sqli-labs11-28/27-2.png" alt="Alt text"><br>通过显示可以看出，过滤union 以及select就是显示id=1的信息<br>手工确定过滤了union select –  // 以及空格</li>
+<li>进行字符绕过<br>在测试过程中select进行了两次过滤<br><img src="/2020/04/25/sqli-labs11-28/27-3.png" alt="Alt text"><br>要么使用你进行三次叠写，要么编码绕过<br><img src="/2020/04/25/sqli-labs11-28/27-4.png" alt="Alt text"><br>####less-27a<br>就是双引号的27题</li>
+<li>判断注入类型是否存在括号<br><img src="/2020/04/25/sqli-labs11-28/27a-1.png" alt="Alt text"></li>
+<li>确定被过滤的符号<br>空格 – union select //<br><img src="/2020/04/25/sqli-labs11-28/27a-2.png" alt="Alt text"><br>####less-28</li>
+<li>判断注入类型，是否存在括号<br><img src="/2020/04/25/sqli-labs11-28/28-1.png" alt="Alt text"><br>结果显示是有正确显示的单引号括号注入</li>
+<li>确定被过滤的符号—为空格</li>
+<li>构造注入语句<br><img src="/2020/04/25/sqli-labs11-28/28-2.png" alt="Alt text"><br>####less-28a</li>
+<li>判断注入类型<br>单引号括号注入</li>
+<li>确定被过滤符号<br><img src="/2020/04/25/sqli-labs11-28/28a-1.png" alt="Alt text">)<br>(concat_ws(0x7e,username,password)) %a0  from  %a0   (security.users)  limit %a0  3,1<br><img src="/2020/04/25/sqli-labs11-28/28a-2.png" alt="Alt text"></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>秃头少女的安慰奖金</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.jpg" alt="lyly WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="lyly Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/20/mysql%E9%85%8D%E7%BD%AEsecure-file-priv/" rel="next" title="mysql导出文件secure-file-priv配置问题">
+                <i class="fa fa-chevron-left"></i> mysql导出文件secure-file-priv配置问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/29/http%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="http的学习笔记">
+                http的学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/lyly.png"
+                alt="lyly" />
+            
+              <p class="site-author-name" itemprop="name">lyly</p>
+              <p class="site-description motion-element" itemprop="description">I can't predict the result, just try</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#less-16"><span class="nav-number">1.</span> <span class="nav-text">less-16</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyly</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
