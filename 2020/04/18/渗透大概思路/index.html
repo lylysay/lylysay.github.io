@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="I can&#39;t predict the result, just try">
+<meta name="description" content="一. 信息收集：  whois域名查询，网站注册者个人信息。 服务器旁站，子域名站点。（这一步是主站不好渗透的情况下） 服务器操作系统版本，中间件（看看有没有已知漏洞） 端口扫描（针对开放服务确定有没有可利用的，windows远程执行就是靠445） 扫描网站(看看有没有敏感文件，路径)二.漏洞扫描：进行漏洞检测（很多漏洞检测的工具比如xray啥的）暴力破解，sql注入，xss，代码执行，越权访问，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="渗透大概思路">
 <meta property="og:url" content="http://yoursite.com/2020/04/18/%E6%B8%97%E9%80%8F%E5%A4%A7%E6%A6%82%E6%80%9D%E8%B7%AF/index.html">
 <meta property="og:site_name" content="codegirl&#39;Diary">
-<meta property="og:description" content="I can&#39;t predict the result, just try">
+<meta property="og:description" content="一. 信息收集：  whois域名查询，网站注册者个人信息。 服务器旁站，子域名站点。（这一步是主站不好渗透的情况下） 服务器操作系统版本，中间件（看看有没有已知漏洞） 端口扫描（针对开放服务确定有没有可利用的，windows远程执行就是靠445） 扫描网站(看看有没有敏感文件，路径)二.漏洞扫描：进行漏洞检测（很多漏洞检测的工具比如xray啥的）暴力破解，sql注入，xss，代码执行，越权访问，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-18T06:41:12.000Z">
-<meta property="article:modified_time" content="2020-04-18T06:41:12.943Z">
+<meta property="article:modified_time" content="2020-05-27T00:45:10.661Z">
 <meta property="article:author" content="lyly">
 <meta name="twitter:card" content="summary">
 
@@ -304,7 +304,15 @@
       
 
       
-        
+        <p>一. 信息收集：</p>
+<ol>
+<li>whois域名查询，网站注册者个人信息。</li>
+<li>服务器旁站，子域名站点。（这一步是主站不好渗透的情况下）</li>
+<li>服务器操作系统版本，中间件（看看有没有已知漏洞）</li>
+<li>端口扫描（针对开放服务确定有没有可利用的，windows远程执行就是靠445）</li>
+<li>扫描网站(看看有没有敏感文件，路径)<br>二.漏洞扫描：<br>进行漏洞检测（很多漏洞检测的工具比如xray啥的）暴力破解，sql注入，xss，代码执行，越权访问，文件包含、上传等等。<br>三.漏洞利用<br>确定了漏洞，就是为了权限，获取webshell等等<br>四.权限管理<br>五.日志清理<br>另一篇博客嘻嘻</li>
+</ol>
+
       
     </div>
     
@@ -313,35 +321,6 @@
 
     
 
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>秃头少女的安慰奖金</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Donate</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/weixin.jpg" alt="lyly WeChat Pay"/>
-        <p>WeChat Pay</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="lyly Alipay"/>
-        <p>Alipay</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
     
 
     
