@@ -17,10 +17,19 @@
   <meta name="description" content="can&#39;t predict the result, just try">
   <meta name="author" content="lyly">
   <meta name="keywords" content="">
-  <title>Archives - codegirl&#39;Diary</title>
+  <title>sql基础笔记 - codegirl&#39;Diary</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -42,7 +51,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -116,6 +125,40 @@
             </span>
 
             
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-03-19 18:05">
+      March 19, 2020 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      559 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
           
@@ -126,67 +169,106 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">11 posts in total.</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/04/29/http%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">http的学习笔记</span>
-      <span style="float: right;">04-29</span>
-    </a>
-  
-    
-    <a href="/2020/04/16/owasp%20top%20%E5%8D%81%E5%A4%A7%E6%BC%8F%E6%B4%9E%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">owasp top 十大漏洞理解笔记</span>
-      <span style="float: right;">04-16</span>
-    </a>
-  
-    
-    <a href="/2020/04/14/sqli-labs29-32/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">sqli-labs29-32</span>
-      <span style="float: right;">04-14</span>
-    </a>
-  
-    
-    <a href="/2020/04/11/mysql%E9%85%8D%E7%BD%AEsecure-file-priv/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">mysql导出文件secure-file-priv配置问题</span>
-      <span style="float: right;">04-11</span>
-    </a>
-  
-    
-    <a href="/2020/04/04/sql29%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">sql29配置问题与双服务器理解</span>
-      <span style="float: right;">04-04</span>
-    </a>
-  
-    
-    <a href="/2020/04/02/sqli-labs11-28/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">sqli-labs通关11-28</span>
-      <span style="float: right;">04-02</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h4 id="sql注入前，语法复习"><a href="#sql注入前，语法复习" class="headerlink" title="sql注入前，语法复习"></a>sql注入前，语法复习</h4><p>重新梳理（关键字记得大写，sql不分，但是自己会好分点！！）</p>
+<h5 id="sql：假装有一个表-user（name，id，age）"><a href="#sql：假装有一个表-user（name，id，age）" class="headerlink" title="sql：假装有一个表 user（name，id，age）"></a>sql：假装有一个表 user（name，id，age）</h5><ul>
+<li>进入数据库 ：use 库名<ul>
+<li>查询信息：SELECT  * FROM user；</li>
+</ul>
+</li>
+<li>查询指定字段：SELECT  name ，id FROM user；</li>
+<li>列去重（一列的数据有重复的，只想了解一列有哪些不同的）SELECT  DISTINCT id ，id FROM user；</li>
+<li>where 语句：SELECT id from user where id = 2;<br><img src="/2020/03/19/sql%E7%B2%97%E7%95%A5%E7%AC%94%E8%AE%B0/1.png" srcset="/img/loading.gif" alt="Alt text"></li>
+<li>SQL的 AND  和 OR    ：如果第一个条件和第二个条件都成立，则 AND 运算符显示一条记录。</li>
+</ul>
+<p>如果第一个条件和第二个条件中只要有一个成立，则 OR 运算符显示一条记录。</p>
+<ul>
+<li>SQL ORDER BY 关键字<br>ORDER BY 关键字用于对结果集按照一个列或者多个列进行排序。<br>ORDER BY 关键字默认按照升序对记录进行排序。如果需要按照降序对记录进行排序，您可以使用 <strong>DESC</strong> 关键字。</li>
+<li><strong>union</strong> ：SELECT a  FROM tables1 UNION SELECT b FROM table2；（UNION 内部的每个 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每个 SELECT 语句中的列的顺序必须相同）</li>
+</ul>
+<p><strong>函数部分</strong></p>
+<ul>
+<li>concat()  连接两个字符串（有的网站只能显示一行，就可以连接两个多个输出）</li>
+<li>concat_ws(分隔符，str1，str2)</li>
+<li>group by：语句用于结合合计函数，根据一个或多个列对结果集进行分组。</li>
+<li>sleep(): 执行select sleep(N)可以让此语句运行N秒钟</li>
+<li>left(): 返回最左边的n个字符的字符串str，或NULL如果任何参数是NULL。</li>
+<li>COUNT:  count和distinct一起使用<br>COUNT(DISTINCT column_name)</li>
+<li>FLOOR() - 返回最大整数</li>
+<li>rand：用于产生 0 至 1 之间的随机数</li>
+<li>length：返回字符串的长度，以字节为单位</li>
+<li>EXTRACT() 函数用于返回日期/时间的单独部分，比如年、月、日、小时、分钟等等。</li>
+<li>LIKE :进行匹配（SELECT * FEOM user_name where name like ‘a%’）<br>%代表0或者多个字符，_ 代替一个字符<br>[]charlist]  代表任何    ，   [!charlist]不在字符列表中的任何单一字符。</li>
+<li>in ：允许在where的子句中规定多个值。</li>
+<li>between  and :子句中的值有一定范围。（not between）</li>
+</ul>
 
-
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
               </div>
+              
+                <p class="note note-warning">小弟，内容有理解错的，大佬通过邮件联系提醒修改吧~</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/20/sqli-labs1-10/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">sqli-labs通关1-10</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/18/%E6%B8%97%E9%80%8F%E5%A4%A7%E6%A6%82%E6%80%9D%E8%B7%AF/">
+                        <span class="hidden-mobile">渗透大概思路</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
+
+            
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -290,6 +372,31 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -297,7 +404,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Archive&nbsp;",
+        "sql基础笔记&nbsp;",
       ],
       cursorChar: "",
       typeSpeed: 70,
@@ -312,6 +419,21 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
 
 
   <script  src="/js/local-search.js" ></script>
@@ -325,6 +447,20 @@
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 

@@ -17,10 +17,19 @@
   <meta name="description" content="can&#39;t predict the result, just try">
   <meta name="author" content="lyly">
   <meta name="keywords" content="">
-  <title>Archives - codegirl&#39;Diary</title>
+  <title>sqli-labs29-32 - codegirl&#39;Diary</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -42,7 +51,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -116,6 +125,40 @@
             </span>
 
             
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-04-14 13:05">
+      April 14, 2020 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      400 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
           
@@ -126,67 +169,83 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">11 posts in total.</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/04/29/http%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">http的学习笔记</span>
-      <span style="float: right;">04-29</span>
-    </a>
-  
-    
-    <a href="/2020/04/16/owasp%20top%20%E5%8D%81%E5%A4%A7%E6%BC%8F%E6%B4%9E%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">owasp top 十大漏洞理解笔记</span>
-      <span style="float: right;">04-16</span>
-    </a>
-  
-    
-    <a href="/2020/04/14/sqli-labs29-32/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">sqli-labs29-32</span>
-      <span style="float: right;">04-14</span>
-    </a>
-  
-    
-    <a href="/2020/04/11/mysql%E9%85%8D%E7%BD%AEsecure-file-priv/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">mysql导出文件secure-file-priv配置问题</span>
-      <span style="float: right;">04-11</span>
-    </a>
-  
-    
-    <a href="/2020/04/04/sql29%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">sql29配置问题与双服务器理解</span>
-      <span style="float: right;">04-04</span>
-    </a>
-  
-    
-    <a href="/2020/04/02/sqli-labs11-28/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">sqli-labs通关11-28</span>
-      <span style="float: right;">04-02</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>在关于less29配置已经介绍了关于双服务器。</p>
+<h4 id="less-29"><a href="#less-29" class="headerlink" title="less-29"></a>less-29</h4><p>1.怎么确认是否是双服务器<br>我们先像简单的判断符号类型<br><img src="/2020/04/14/sqli-labs29-32/29-1.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/04/14/sqli-labs29-32/29-2.png" srcset="/img/loading.gif" alt="Alt text"><br>两张对比图可以看出来，报错的页面其实被跳转到了jsp也就是tomcat服务器。<br>在这里双服务器也就进行了两次判断，在tomcat也就是我们输入的值，注入语句被提前检测。<br><img src="/2020/04/14/sqli-labs29-32/29-3.png" srcset="/img/loading.gif" alt="Alt text"><br>第二个参数传入达到了我们前28关的思路。</p>
+<h4 id="less-30"><a href="#less-30" class="headerlink" title="less-30"></a>less-30</h4><p>记得修改这关指向路劲哟~<br>1.判断注入类型以及是否存在括号<br><img src="/2020/04/14/sqli-labs29-32/30-1.png" srcset="/img/loading.gif" alt="Alt text"><br>还是通过（“2”or“1”=“2”）判断<br>如果存在括号，那么布尔值被认定为1，如果不存在括号，那么就是2<br><img src="/2020/04/14/sqli-labs29-32/30-2.png" srcset="/img/loading.gif" alt="Alt text"><br>这样就是有正确回显无错误回显的双引号注入。<br>2.预先确定注入方法：</p>
+<ul>
+<li>union（这道题优先）</li>
+<li>盲注<h4 id="less-31"><a href="#less-31" class="headerlink" title="less-31"></a>less-31</h4></li>
+</ul>
+<p>1.判断注入类型<br><img src="/2020/04/14/sqli-labs29-32/31-1.png" srcset="/img/loading.gif" alt="Alt text"><br>结论：双引号括号有两种回显，确定注入方法<br>2.构造注入语句<br><img src="/2020/04/14/sqli-labs29-32/31-2.png" srcset="/img/loading.gif" alt="Alt text"></p>
+<h4 id="less-32"><a href="#less-32" class="headerlink" title="less-32"></a>less-32</h4><p>宽字节过滤：在<strong>mysql使用的gdk</strong>中将两个字符看作一个汉字，第一个大于128。<br>我所理解的宽字节注入就是在符号被过滤的情况下，输入’但是执行过程中被转义，解决\带来的问题，所以添加%df就变成%df%5c%27,汉字占据两个字符，所以%27被保留。<br>1.确定注入类型<br><img src="/2020/04/14/sqli-labs29-32/32-1.png" srcset="/img/loading.gif" alt="Alt text"><br>通过返回类型可以看出，实际上不是过滤，而是一种转义，所以可以使用宽字节注入。</p>
 
-
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
               </div>
+              
+                <p class="note note-warning">小弟，内容有理解错的，大佬通过邮件联系提醒修改吧~</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/16/owasp%20top%20%E5%8D%81%E5%A4%A7%E6%BC%8F%E6%B4%9E%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">owasp top 十大漏洞理解笔记</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/11/mysql%E9%85%8D%E7%BD%AEsecure-file-priv/">
+                        <span class="hidden-mobile">mysql导出文件secure-file-priv配置问题</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
+
+            
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -290,6 +349,31 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -297,7 +381,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Archive&nbsp;",
+        "sqli-labs29-32&nbsp;",
       ],
       cursorChar: "",
       typeSpeed: 70,
@@ -312,6 +396,21 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
 
 
   <script  src="/js/local-search.js" ></script>
@@ -325,6 +424,20 @@
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 
