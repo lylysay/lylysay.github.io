@@ -17,7 +17,7 @@
   <meta name="description" content="can&#39;t predict the result, just try">
   <meta name="author" content="lyly">
   <meta name="keywords" content="">
-  <title>python进行数据清洗(一) - codegirl&#39;Diary</title>
+  <title>python操作mysql - codegirl&#39;Diary</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -111,8 +111,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-05-12 21:29">
-      May 12, 2020 pm
+    <time datetime="2020-05-19 14:40">
+      May 19, 2020 pm
     </time>
   </div>
 
@@ -122,7 +122,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      579 字
+      169 字
     </span>
   
 
@@ -132,7 +132,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      3
        分钟
     </span>
   
@@ -163,53 +163,33 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>进行数据处理，首先应该时明确目的，模型构建需要怎样的数据支持，哪些数据是作为参考点进行，哪些是不要求非常准确的。数据生成环境，用户输入都会生成差异数据<br>有任何函数不懂，还是看<a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.fillna.html" target="_blank" rel="noopener">参考文档</a>了解的最快</p>
-<h5 id="一、jupyter安装启动"><a href="#一、jupyter安装启动" class="headerlink" title="一、jupyter安装启动"></a>一、jupyter安装启动</h5><p>自己环境中存在python3，以及pip。</p>
-<ul>
-<li>下载相关的库以及进行换源<pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> pandas
-pip <span class="hljs-keyword">install</span> numpy
-<span class="hljs-comment">#使用jieba要进行换源非数据清洗内容</span>
-pip <span class="hljs-keyword">install</span> jieba -i https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
-<h5 id="二、了解数据"><a href="#二、了解数据" class="headerlink" title="二、了解数据"></a>二、了解数据</h5></li>
-</ul>
-<p>1.导入数据并了解数据信息<br>通过pandas对存在csv/excel等数据进行存储。(路径就是存储数据的路径信息)<br><img src="/2020/05/12/python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86(%E4%B8%80)/1-1.png" srcset="/img/loading.gif" alt="Alt text"><br>通过对前十条信息，对数据结构进行大概的了解。<br>2.通过对整体的数据可以将清洗大致分为：处理缺失值、重复值、异常值的处理，文本字符串。时间格式序列等等，没有一定的先后顺序。<br>3.大致的数据查看<br><img src="/2020/05/12/python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86(%E4%B8%80)/1-2.png" srcset="/img/loading.gif" alt="Alt text">可以看出gross这一列的相关描述，对数据的估计.<br>4.查看数据:</p>
-<ul>
-<li>data.isnull 检查缺失值</li>
-<li>data.colname.descript()</li>
-<li>data[‘一列‘]</li>
-<li>多列：data[[‘1’,’2’]]</li>
-<li>数据过滤where data[data[colname]&gt;condition]</li>
-<li>data.info()</li>
-<li>data.describe()</li>
-</ul>
-<h5 id="三-处理数据"><a href="#三-处理数据" class="headerlink" title="三.处理数据"></a>三.处理数据</h5><p>添加默认值：将作为可不准确数据进行一些替换，这样缺失值不存在也不会影响。<br>修正数据</p>
-<pre><code class="hljs css"><span class="hljs-selector-tag">data</span><span class="hljs-selector-attr">[<span class="hljs-string">'movie_title'</span>]</span><span class="hljs-selector-class">.str</span><span class="hljs-selector-class">.upper</span>()
-<span class="hljs-selector-tag">data</span><span class="hljs-selector-attr">[<span class="hljs-string">'movie_title'</span>]</span><span class="hljs-selector-class">.str</span><span class="hljs-selector-class">.strip</span>()</code></pre>
-<p>去除缺失值行</p>
-<pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">dropna</span><span class="hljs-params">(how = <span class="hljs-string">'all'</span>)</span></span>
-#删除全部是nan的行
-<span class="hljs-function"><span class="hljs-title">dropna</span><span class="hljs-params">(thresh = <span class="hljs-number">4</span>)</span></span>
-#删除其中有四个nan的行
-<span class="hljs-function"><span class="hljs-title">dropna</span><span class="hljs-params">(subset=[<span class="hljs-string">'1'</span>,<span class="hljs-string">'2'</span>])</span></span>
-#指定的列不能有nan，一列或者多列的判定，存在nan直接删除</code></pre>
-<p><img src="/2020/05/12/python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86(%E4%B8%80)/1-3.png" srcset="/img/loading.gif" alt="Alt text"></p>
-<p>去除缺失值列</p>
-<pre><code class="hljs haskell"><span class="hljs-class"><span class="hljs-keyword">data</span>.dropna(<span class="hljs-title">axis</span>=1,<span class="hljs-title">how</span> = '<span class="hljs-title">all'</span>)</span>
-<span class="hljs-meta">#删除所有列中</span>
-<span class="hljs-class"><span class="hljs-keyword">data</span>.dropna(<span class="hljs-title">axis</span>=1,<span class="hljs-title">how</span> = '<span class="hljs-title">any'</span>)</span></code></pre>
-<p><img src="/2020/05/12/python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86(%E4%B8%80)/1-4.png" srcset="/img/loading.gif" alt="Alt text"></p>
-<p>规范数据<br>有些数据被读取时，数读作str，str读作数<br>根据自己的需求进行转换</p>
-<pre><code class="hljs reasonml">data = pd.read<span class="hljs-constructor">_csv('.<span class="hljs-operator">/</span><span class="hljs-params">data</span><span class="hljs-operator">/</span><span class="hljs-params">moive_metadata</span>.<span class="hljs-params">csv</span>', <span class="hljs-params">dtype</span>=&#123;'<span class="hljs-params">num_critic_for_reviews</span>':<span class="hljs-params">str</span>&#125;)</span></code></pre>
-<p>去除重复值</p>
-<pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">duplicated</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"><span class="hljs-title">drop_duplicates</span><span class="hljs-params">()</span></span></code></pre>
-<p>重命名列名<br>数据处理以后，有可能会出现index或者列不连续的现象<br><img src="/2020/05/12/python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86(%E4%B8%80)/1-5.png" srcset="/img/loading.gif" alt="Alt text"><br>这个时候需要自己进行index以及列的rename</p>
-<pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">rename</span><span class="hljs-params">(columns = &#123;‘title_year’:’release_date’, ‘movie_facebook_likes’:’facebook_likes’&#125;)</span></span>
-
-data<span class="hljs-selector-class">.columns</span> = pd.Series([<span class="hljs-string">'av'</span>,<span class="hljs-string">'title'</span>,<span class="hljs-string">'tag'</span>,<span class="hljs-string">'rp'</span>])</code></pre>
-
-<p>保存结果</p>
-<pre><code class="hljs reasonml">data.<span class="hljs-keyword">to</span><span class="hljs-constructor">_csv(‘<span class="hljs-params">cleanfile</span>.<span class="hljs-params">csv</span>’ <span class="hljs-params">encoding</span>=’<span class="hljs-params">utf</span>-8’)</span></code></pre>
+              <p>xlrd和pymysql库需要简单了解一下</p>
+ <pre><code class="hljs pgsql"><span class="hljs-keyword">import</span> xlrd,pymysql
+//连接数据库
+conn = pymysql.<span class="hljs-keyword">connect</span>(host = <span class="hljs-string">'127.0.0.1'</span>,<span class="hljs-keyword">user</span> = <span class="hljs-string">'root'</span>,<span class="hljs-keyword">password</span> = <span class="hljs-string">'123123'</span>,<span class="hljs-keyword">database</span> = <span class="hljs-string">'mysql'</span>,charset = <span class="hljs-string">'utf8'</span>)
+//创建游标
+<span class="hljs-keyword">cursor</span> = conn.<span class="hljs-keyword">cursor</span>(<span class="hljs-keyword">cursor</span>=pymysql.cursors.DictCursor)
+<span class="hljs-keyword">sql</span> = "insert into parasaga (UP_name,UP_UID,UP_fans_ranking,UP_fans_num,UP_play_ranking,UP_play_num,UP_point_ranking,UP_point_num) values (%s,%s,%s,%s,%s,%s,%s,%s)"
+//进行excel读取数据
+file = xlrd.open_workbook("D:/up_data.xls")
+sheet_1 = file.sheet_by_index(<span class="hljs-number">0</span>)
+row_content = sheet_1.row_values(<span class="hljs-number">0</span>)
+row_number = sheet_1.nrows
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,row_number):
+    UP_name = sheet_1.cell(i,<span class="hljs-number">0</span>).<span class="hljs-keyword">value</span>
+    UP_UID = sheet_1.cell(i,<span class="hljs-number">1</span>).<span class="hljs-keyword">value</span>
+    UP_fans_ranking = sheet_1.cell(i,<span class="hljs-number">2</span>).<span class="hljs-keyword">value</span>
+    UP_fans_num = sheet_1.cell(i,<span class="hljs-number">3</span>).<span class="hljs-keyword">value</span>
+    UP_play_ranking = sheet_1.cell(i,<span class="hljs-number">4</span>).<span class="hljs-keyword">value</span>
+    UP_play_num = sheet_1.cell(i,<span class="hljs-number">5</span>).<span class="hljs-keyword">value</span>
+    UP_point_ranking = sheet_1.cell(i,<span class="hljs-number">6</span>).<span class="hljs-keyword">value</span>
+    UP_point_num = sheet_1.cell(i,<span class="hljs-number">7</span>).<span class="hljs-keyword">value</span>
+    <span class="hljs-keyword">values</span> = (UP_name,UP_UID,UP_fans_ranking,UP_fans_num,UP_play_ranking,UP_play_num,UP_point_ranking,UP_point_num)
+    //执行<span class="hljs-keyword">sql</span>语句
+    <span class="hljs-keyword">cursor</span>.<span class="hljs-keyword">execute</span>(<span class="hljs-keyword">sql</span>,<span class="hljs-keyword">values</span>)
+    conn.<span class="hljs-keyword">commit</span>()
+<span class="hljs-keyword">cursor</span>.<span class="hljs-keyword">close</span>()
+conn.<span class="hljs-keyword">close</span>()</code></pre>
             </article>
             <hr>
             <div>
@@ -225,9 +205,9 @@ data<span class="hljs-selector-class">.columns</span> = pd.Series([<span class="
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/05/19/%E5%AE%9E%E7%8E%B0pyhon%E6%93%8D%E4%BD%9Cmysql/">
+                      <a href="/2020/05/24/xss%E6%BC%8F%E6%B4%9E/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">python操作mysql</span>
+                        <span class="hidden-mobile">xss漏洞：</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -235,8 +215,8 @@ data<span class="hljs-selector-class">.columns</span> = pd.Series([<span class="
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/04/29/http%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="hidden-mobile">http的学习笔记</span>
+                      <a href="/2020/05/12/python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86(%E4%B8%80)/">
+                        <span class="hidden-mobile">python进行数据清洗(一)</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -379,7 +359,7 @@ data<span class="hljs-selector-class">.columns</span> = pd.Series([<span class="
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "python进行数据清洗(一)&nbsp;",
+        "python操作mysql&nbsp;",
       ],
       cursorChar: "",
       typeSpeed: 70,
