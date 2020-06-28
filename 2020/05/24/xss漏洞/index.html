@@ -163,7 +163,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h5 id="xss原理：通过对html注入进行插入恶意代码，用户访问时产生的一种攻击。"><a href="#xss原理：通过对html注入进行插入恶意代码，用户访问时产生的一种攻击。" class="headerlink" title="xss原理：通过对html注入进行插入恶意代码，用户访问时产生的一种攻击。"></a>xss原理：通过对html注入进行插入恶意代码，用户访问时产生的一种攻击。</h5><ul>
+              <h5 id="xss原理："><a href="#xss原理：" class="headerlink" title="xss原理："></a>xss原理：</h5><p>通过对html注入进行插入恶意代码，用户访问时产生的一种攻击。</p>
+<ul>
 <li>xss reflected:通过用户输入显示在页面或者诱导用户点击恶意链接形成的xss<br><img src="/2020/05/24/xss%E6%BC%8F%E6%B4%9E/xss-1.png" srcset="/img/loading.gif" alt="Alt text"><pre><code class="hljs xml"><span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(1)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 #构造页面的html闭合实现注入</code></pre>
 代码原理：<br><img src="/2020/05/24/xss%E6%BC%8F%E6%B4%9E/xss-2.png" srcset="/img/loading.gif" alt="Alt text"><br>相对于进行处理的漏洞来说：先不看源代码<br>首先输入同样的内容，没有显示，但是单独将&lt;&gt;、/、script、pre输入都能够正常输出显示，但是合起来输入就没办法输入，可以判断进行了组合过滤。<pre><code class="hljs angelscript">对于xss进行绕过：
