@@ -127,6 +127,46 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/03/20/sqli-labs1-10/" target="_self">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="sqli-labs通关1-10">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/03/20/sqli-labs1-10/">sqli-labs通关1-10</a>
+
+      <a href="/2020/03/20/sqli-labs1-10/" class="index-excerpt">
+        
+        
+          
+        
+        <div>sqli-labs通关手册主要记录自己的思路
+less-1在url中输入？id=1显示的结果是正确的，所以进行报错处理
+
+输入？id=1’出现报错信息源码分析SELECT * FROM users WHERE id=’$id’ LIMIT 0,1
+
+SELECT * FROM users WHERE id=’1’’ LIMIT 0,1
+
+order by可以进行判断列数，也可以进行下一步直接猜。
+</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-03-20
+          </div>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/03/19/sql%E7%B2%97%E7%95%A5%E7%AC%94%E8%AE%B0/" target="_self">
           <img src="/img/avatar.png" srcset="/img/loading.gif" alt="sql基础笔记">
         </a>

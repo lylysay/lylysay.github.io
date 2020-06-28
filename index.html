@@ -127,6 +127,42 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/05/25/csrf/" target="_self">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="csrf漏洞">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/05/25/csrf/">csrf漏洞</a>
+
+      <a href="/2020/05/25/csrf/" class="index-excerpt">
+        
+        
+          
+        
+        <div>
+原理：跨站请求伪造攻击，在用户没有无意识的情况盗用用户身份进行攻击。用户a先成功登录银行黑客b也在该银行b做了一个网站，网站中存在转账给用户b的url，在一个图片或者按钮下，用户a只要登录银行并且点击了b的网站下的东西，就会转账给b。
+检测：进行正常抓包，去除referer，验证这个字段是否有效。或者通过工具检测csrftester等
+防御csrf：
+验证referer:(&#39;HTTP R</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-05-25
+          </div>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/05/24/xss%E6%BC%8F%E6%B4%9E/" target="_self">
           <img src="/img/avatar.png" srcset="/img/loading.gif" alt="xss漏洞：">
         </a>
@@ -140,11 +176,10 @@
         
           
         
-        <div>#####xss原理：通过对html注入进行插入恶意代码，用户访问时产生的一种攻击。
-
+        <div>xss原理：通过对html注入进行插入恶意代码，用户访问时产生的一种攻击。
 xss reflected:通过用户输入显示在页面或者诱导用户点击恶意链接形成的xss&lt;/pre&gt;&lt;script&gt;alert(1)&lt;/script&gt;
 #构造页面的html闭合实现注入
-代码原理：相对于进行处理的漏洞来说：先不看源代码首先输入同样的内容，没有显示，但是单独将&l</div>
+代码原理：相对于进行处理的漏洞来说：先不看源代码首先输入同样的内容，没有显示，但是单独将&lt;&gt;</div>
       </a>
 
       <div class="index-btm post-metas">
@@ -434,46 +469,6 @@ le</div>
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>&nbsp;2020-04-02
-          </div>
-        
-        
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/03/20/sqli-labs1-10/" target="_self">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="sqli-labs通关1-10">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2020/03/20/sqli-labs1-10/">sqli-labs通关1-10</a>
-
-      <a href="/2020/03/20/sqli-labs1-10/" class="index-excerpt">
-        
-        
-          
-        
-        <div>sqli-labs通关手册主要记录自己的思路
-less-1在url中输入？id=1显示的结果是正确的，所以进行报错处理
-
-输入？id=1’出现报错信息源码分析SELECT * FROM users WHERE id=’$id’ LIMIT 0,1
-
-SELECT * FROM users WHERE id=’1’’ LIMIT 0,1
-
-order by可以进行判断列数，也可以进行下一步直接猜。
-</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-03-20
           </div>
         
         
