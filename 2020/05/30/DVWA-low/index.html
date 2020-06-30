@@ -219,7 +219,7 @@
 <li>判断注入类型以及是否存在括号：<br>没有括号的单引号注入</li>
 <li>判断注入方式：<br>因为没有具体回显，但是存在正错回显，锁定布尔盲注</li>
 <li>构造注入语句：<pre><code class="hljs ada">?id=<span class="hljs-number">1</span>' <span class="hljs-keyword">and</span> left((<span class="hljs-keyword">select</span> database()),<span class="hljs-number">1</span>)=<span class="hljs-symbol">'d</span></code></pre>
-<img src="/2020/05/30/DVWA-low/sql-4.png" srcset="/img/loading.gif" alt="Alt text"><h5 id="Weak-Session-IDs：靶场问题后面补"><a href="#Weak-Session-IDs：靶场问题后面补" class="headerlink" title="Weak Session IDs：靶场问题后面补"></a>Weak Session IDs：靶场问题后面补</h5><h5 id="xss-dom："><a href="#xss-dom：" class="headerlink" title="xss dom："></a>xss dom：</h5></li>
+<img src="/2020/05/30/DVWA-low/sql-4.png" srcset="/img/loading.gif" alt="Alt text"><h5 id="Weak-Session-IDs："><a href="#Weak-Session-IDs：" class="headerlink" title="Weak Session IDs："></a>Weak Session IDs：</h5>靶场问题后面补<h5 id="xss-dom："><a href="#xss-dom：" class="headerlink" title="xss dom："></a>xss dom：</h5></li>
 <li>判断xss类型：f12找inner，document.write()之类的函数</li>
 <li>script解读：<pre><code class="hljs livescript"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">document</span>.location.href.indexOf(<span class="hljs-string">"default="</span>) &gt;= <span class="hljs-number">0</span>) &#123;
 						<span class="hljs-keyword">var</span> lang = <span class="hljs-built_in">document</span>.location.href.substring(<span class="hljs-built_in">document</span>.location.href.indexOf(<span class="hljs-string">"default="</span>)+<span class="hljs-number">8</span>);
@@ -253,7 +253,7 @@
                 
               </div>
               
-                <p class="note note-warning">小弟，内容有理解错的，联系我吧~</p>
+                <p class="note note-warning">仅学习笔记分享，如有错请联系我吧~</p>
               
               
                 <div class="post-prevnext row">

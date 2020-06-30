@@ -17,7 +17,7 @@
   <meta name="description" content="can&#39;t predict the result, just try">
   <meta name="author" content="lyly">
   <meta name="keywords" content="">
-  <title>渗透大概思路 - codegirl&#39;Diary</title>
+  <title>渗透思路 - codegirl&#39;Diary</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -122,7 +122,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      193 字
+      626 字
     </span>
   
 
@@ -132,7 +132,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      6
        分钟
     </span>
   
@@ -163,14 +163,35 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>一. 信息收集：</p>
+              <p>渗透流程被分为四个部分：大致就是信息收集，漏洞检测，漏洞利用，日志清理，生成报告<br>一. 信息收集：</p>
 <ol>
-<li>whois域名查询，网站注册者个人信息。</li>
-<li>服务器旁站，子域名站点。（这一步是主站不好渗透的情况下）</li>
-<li>服务器操作系统版本，中间件（看看有没有已知漏洞）</li>
-<li>端口扫描（针对开放服务确定有没有可利用的，windows远程执行就是靠445）</li>
-<li>扫描网站(看看有没有敏感文件，路径)<br>二.漏洞扫描：<br>进行漏洞检测（很多漏洞检测的工具比如xray啥的）暴力破解，sql注入，xss，代码执行，越权访问，文件包含、上传等等。<br>三.漏洞利用<br>确定了漏洞，就是为了权限，获取webshell等等<br>四.权限管理<br>五.日志清理<br>另一篇博客嘻嘻</li>
+<li><p>首先拿到一个测试网站，需要了解网站大致的特征也就是网站的指纹(cms,cdn,证书,以及网站有什么第三方组件)</p>
+</li>
+<li><p>除了对网站本身，我们还要知道ip(这里就涉及到怎么对cdn进行绕过)，与ip相关的端口，网站域名的whois，与网站有关者的电话、邮箱、qq等等社交账号，利用浏览器针对性搜索信息，例如利用邮箱检索，查到其他的账号，并且社工有其他账号的密码，可以生成专属字典，以及密码设置特点。<br>端口扫描，端口也会存在漏洞（针对开放服务确定有没有可利用的，windows远程执行就是靠445）</p>
+</li>
 </ol>
+<ol start="3">
+<li><p>网站服务器中，用的系统类型、版本号,中间件、同样对于同一个服务器的旁站，以及同一c段都需要知道，能够直接查找是否存在漏洞，或其他网站存在的漏洞作为跳板，到目标服务器上。</p>
+</li>
+<li><p>还有敏感文件，路径等等。</p>
+</li>
+</ol>
+<p>二.  漏洞检测：</p>
+<ol>
+<li>使用工具进行一个大致的扫描，有个大概的方向，观察网站的特点，其中的编辑器搜索栏等等，可能存在sql，xss，抓包查看http中的信息等等。可以参考安全测试指南来进行比较全面的检测</li>
+</ol>
+<p>三. 漏洞利用：<br>找到了漏洞就是要进行得到管理员权限或者其他权限。例如先得到管理员权限，以后登录后台，进行上传木马得到shell，然后从admin提升权限到sys的权限。</p>
+<pre><code class="hljs routeros">权限提升 提权服务器，比如 windows 下 mysql 的 udf 提权，serv-u 提权，windows 低版本的漏洞，如 iis6,pr,巴西烤肉，linux 脏牛漏洞，linux 内核版本漏洞提 权，linux 下的 mysql<span class="hljs-built_in"> system </span>提权以及 oracle 低权限提权</code></pre>
+<p>四. 后续处理：<br>留下后门/清理入侵痕迹，不对公司业务进行干扰</p>
+<pre><code class="hljs maxima">meterpreter: clearev 
+Linux:
+web日志:如apache的access.<span class="hljs-built_in">log</span>,<span class="hljs-built_in">error</span>.<span class="hljs-built_in">log</span>
+直接将日志清除过于明显 
+eg: sed -i -e ‘/<span class="hljs-number">192.169</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span>/d’ history 
+命令的清除，也是对~/.bash_history 进行定向清除 
+日志的清除，/<span class="hljs-built_in">var</span>/<span class="hljs-built_in">log</span>/wtmp 
+登录日志清除 /<span class="hljs-built_in">var</span>/<span class="hljs-built_in">log</span>/secure</code></pre>
+<p>五. 测试报告生成</p>
 
             </article>
             <hr>
@@ -180,7 +201,7 @@
                 
               </div>
               
-                <p class="note note-warning">小弟，内容有理解错的，联系我吧~</p>
+                <p class="note note-warning">仅学习笔记分享，如有错请联系我吧~</p>
               
               
                 <div class="post-prevnext row">
@@ -196,12 +217,6 @@
                   </div>
                   <div class="post-next col-6">
                     
-                    
-                      <a href="/2020/03/18/%E6%B8%97%E9%80%8F%E6%B8%85%E7%90%86jio%E8%BF%B9/">
-                        <span class="hidden-mobile">渗透清理jio迹</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </div>
                 </div>
@@ -341,7 +356,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "渗透大概思路&nbsp;",
+        "渗透思路&nbsp;",
       ],
       cursorChar: "",
       typeSpeed: 70,

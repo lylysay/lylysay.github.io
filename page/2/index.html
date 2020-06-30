@@ -240,57 +240,23 @@ sql：假装有一个表 user（name，id，age）
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/03/18/%E6%B8%97%E9%80%8F%E5%A4%A7%E6%A6%82%E6%80%9D%E8%B7%AF/" target="_self">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="渗透大概思路">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="渗透思路">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2020/03/18/%E6%B8%97%E9%80%8F%E5%A4%A7%E6%A6%82%E6%80%9D%E8%B7%AF/">渗透大概思路</a>
+      <a class="index-header" href="/2020/03/18/%E6%B8%97%E9%80%8F%E5%A4%A7%E6%A6%82%E6%80%9D%E8%B7%AF/">渗透思路</a>
 
       <a href="/2020/03/18/%E6%B8%97%E9%80%8F%E5%A4%A7%E6%A6%82%E6%80%9D%E8%B7%AF/" class="index-excerpt">
         
         
           
         
-        <div>一. 信息收集：
+        <div>渗透流程被分为四个部分：大致就是信息收集，漏洞检测，漏洞利用，日志清理，生成报告一. 信息收集：
 
-whois域名查询，网站注册者个人信息。
-服务器旁站，子域名站点。（这一步是主站不好渗透的情况下）
-服务器操作系统版本，中间件（看看有没有已知漏洞）
-端口扫描（针对开放服务确定有没有可利用的，windows远程执行就是靠445）
-扫描网站(看看有没有敏感文件，路径)二.漏洞扫描：进行漏洞检测（很多漏洞检测的工具比如xray啥的）暴力破解，sql注入，xss，代码执行，越权访问，</div>
-      </a>
+首先拿到一个测试网站，需要了解网站大致的特征也就是网站的指纹(cms,cdn,证书,以及网站有什么第三方组件)
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-03-18
-          </div>
-        
-        
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/03/18/%E6%B8%97%E9%80%8F%E6%B8%85%E7%90%86jio%E8%BF%B9/" target="_self">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="渗透清理jio迹">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2020/03/18/%E6%B8%97%E9%80%8F%E6%B8%85%E7%90%86jio%E8%BF%B9/">渗透清理jio迹</a>
-
-      <a href="/2020/03/18/%E6%B8%97%E9%80%8F%E6%B8%85%E7%90%86jio%E8%BF%B9/" class="index-excerpt">
-        
-        
-          
-        
-        <div></div>
+除了对网站本身，我们还要知道ip(这里就涉及到怎么对cdn进行绕过)，与ip相关的端口，网站域名的whois，与网站有关者的电话、邮箱、qq等等社交账号，利用浏览器针对性搜索信息，例如利</div>
       </a>
 
       <div class="index-btm post-metas">
